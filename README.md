@@ -27,6 +27,10 @@ To do this, the element must have a defined height or width (either as an attrib
 If we don't have size information, we still will optimize the image to use the FireSize CDN,
 which can have a significant performance improvement.
 
+### Options
+
+If you don't wish for a specific image to be optimized, add the `no-firesize` class to it.
+
 ## Errata
 
 This project is released under the MIT license.
