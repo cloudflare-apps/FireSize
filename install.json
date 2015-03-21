@@ -4,10 +4,6 @@
       {
         "type": "script",
         "src": "./optimize.js"
-      },
-      {
-        "type": "script",
-        "contents": "FireSize.init()"
       }
     ]
   }
