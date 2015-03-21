@@ -37,13 +37,12 @@ checkNode = (addedNode) ->
       if addedNode.matches(selector)
         addedNode.src = optimizeSrc addedNode
 
-observer = new MutationObserver (mutations) ->
-  for mutation in mutations
-    for addedNode in mutation.addedNodes
-      checkNode(addedNode)
+if window.MutationObserver?
+  observer = new MutationObserver (mutations) ->
+    for mutation in mutations
+      for addedNode in mutation.addedNodes
+        checkNode(addedNode)
 
-window.FireSize =
-  init: (region=document.documentElement) ->
-    observer.observe region,
-      childList: true
-      subtree: true
+  observer.observe document.documentElement,
+    childList: true
+    subtree: true
