@@ -31,6 +31,11 @@ which can have a significant performance improvement.
 
 If you don't wish for a specific image to be optimized, add the `no-firesize` class to it.
 
+### Cavets
+
+- Doesn't work on images inserted by javascript dynamically
+- You are depending on FireSize to be 'up' and working.
+
 ## Errata
 
 This project is released under the MIT license.
