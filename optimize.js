@@ -48,35 +48,29 @@
     }
   };
 
-  observer = new MutationObserver(function(mutations) {
-    var addedNode, mutation, _i, _len, _results;
-    _results = [];
-    for (_i = 0, _len = mutations.length; _i < _len; _i++) {
-      mutation = mutations[_i];
-      _results.push((function() {
-        var _j, _len1, _ref, _results1;
-        _ref = mutation.addedNodes;
-        _results1 = [];
-        for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
-          addedNode = _ref[_j];
-          _results1.push(checkNode(addedNode));
-        }
-        return _results1;
-      })());
-    }
-    return _results;
-  });
-
-  window.FireSize = {
-    init: function(region) {
-      if (region == null) {
-        region = document.documentElement;
+  if (window.MutationObserver != null) {
+    observer = new MutationObserver(function(mutations) {
+      var addedNode, mutation, _i, _len, _results;
+      _results = [];
+      for (_i = 0, _len = mutations.length; _i < _len; _i++) {
+        mutation = mutations[_i];
+        _results.push((function() {
+          var _j, _len1, _ref, _results1;
+          _ref = mutation.addedNodes;
+          _results1 = [];
+          for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
+            addedNode = _ref[_j];
+            _results1.push(checkNode(addedNode));
+          }
+          return _results1;
+        })());
       }
-      return observer.observe(region, {
-        childList: true,
-        subtree: true
-      });
-    }
-  };
+      return _results;
+    });
+    observer.observe(document.documentElement, {
+      childList: true,
+      subtree: true
+    });
+  }
 
 }).call(this);
