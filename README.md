@@ -11,6 +11,12 @@ The upper timeline is optimized with FireSize, the lower is not.
 
 Add `optimize.js` to the **`<head>`** of your site.  Done!
 
+If you'd like to have an easier time managing your frontend resources, we always recommend installing with [Eager](https://eager.io):
+
+<a href="https://eager.io/app/8Qy6FkTP1WY3/install?source=button">
+	<img src="https://install.eager.io/cta/apps/8Qy6FkTP1WY3.png" border="0" width="292">
+</a>
+
 ## How It Works
 
 We use a [MutationObserver](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver)
