@@ -40,10 +40,22 @@
   selector = 'img:not(.no-firesize)';
 
   checkNode = function(addedNode) {
+    var optimizedSrc, origSrc;
     switch (addedNode.nodeType) {
       case 1:
         if (addedNode.matches(selector)) {
-          return addedNode.src = optimizeSrc(addedNode);
+          optimizedSrc = optimizeSrc(addedNode);
+          origSrc = addedNode.src;
+          if (optimizedSrc !== origSrc) {
+            (function(origSrc, addedNode) {
+              var handler;
+              return addedNode.addEventListener('error', handler = function() {
+                addedNode.removeEventListener('error', handler);
+                return addedNode.src = origSrc;
+              });
+            })(origSrc, addedNode);
+            return addedNode.src = optimizedSrc;
+          }
         }
     }
   };

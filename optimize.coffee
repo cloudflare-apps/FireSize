@@ -35,7 +35,17 @@ checkNode = (addedNode) ->
   switch addedNode.nodeType
     when 1
       if addedNode.matches(selector)
-        addedNode.src = optimizeSrc addedNode
+        optimizedSrc = optimizeSrc addedNode
+        origSrc = addedNode.src
+
+        if optimizedSrc isnt origSrc
+          do (origSrc, addedNode) ->
+            addedNode.addEventListener 'error', handler = ->
+              addedNode.removeEventListener 'error', handler
+
+              addedNode.src = origSrc
+
+          addedNode.src = optimizedSrc
 
 if window.MutationObserver?
   observer = new MutationObserver (mutations) ->
