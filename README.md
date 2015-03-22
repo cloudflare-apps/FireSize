@@ -42,7 +42,7 @@ If you don't wish for a specific image to be optimized, add the `no-firesize` cl
 
 ### Cavets
 
-- Doesn't work on images inserted by javascript dynamically
+- Doesn't optimize images inserted by JavaScript dynamically.
 
 ## Errata
 
