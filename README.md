@@ -9,7 +9,7 @@ The upper timeline is optimized with FireSize, the lower is not.
 
 ## Usage
 
-Add `optimize.js` to the *<head>* of your site.  Done!
+Add `optimize.js` to the **`<head>`** of your site.  Done!
 
 ## How It Works
 
