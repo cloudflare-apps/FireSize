@@ -31,7 +31,7 @@ It wouldn't be possible without the flexability of the [FireSize project](http:/
 ### Optimizations
 
 We shrink the size of the image if we are able to determine at least one of the dimentions.
-To do this, the element must have a defined height or width (either as an attribue or in CSS).
+To do this, the element must have a defined height or width (either as an attribute or in CSS).
 
 If we don't have size information, we still will optimize the image to use the FireSize CDN,
 which can have a significant performance improvement.
