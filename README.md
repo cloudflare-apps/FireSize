@@ -17,6 +17,9 @@ We use a [MutationObserver](https://developer.mozilla.org/en-US/docs/Web/API/Mut
 to detect when `<img>` elements are parsed by the browser, and update the `src`
 to an optimized version before the browser begins to download the original image.
 
+If the image loading errors for any reason, the image will automatically be reverted to it's
+original src.
+
 It wouldn't be possible without the flexability of the [FireSize project](http://firesize.com/).
 
 ### Optimizations
@@ -34,7 +37,6 @@ If you don't wish for a specific image to be optimized, add the `no-firesize` cl
 ### Cavets
 
 - Doesn't work on images inserted by javascript dynamically
-- You are depending on FireSize to be 'up' and working.
 
 ## Errata
 
