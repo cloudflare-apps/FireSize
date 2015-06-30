@@ -30,6 +30,7 @@ optimizeSrc = (el) ->
   "#{ proto }//firesize.com/#{ size.width or '' }x#{ size.height or '' }/g_none/#{ el.src }"
 
 selector = 'img:not(.no-firesize)'
+TIME_LIMIT = 3000
 
 checkNode = (addedNode) ->
   switch addedNode.nodeType
@@ -40,10 +41,31 @@ checkNode = (addedNode) ->
 
         if optimizedSrc isnt origSrc
           do (origSrc, addedNode) ->
-            addedNode.addEventListener 'error', handler = ->
-              addedNode.removeEventListener 'error', handler
+            loaded = false
 
+            done = ->
+              addedNode.removeEventListener 'error', errorHandler
+              addedNode.removeEventListener 'load', loadHandler
+
+              clearTimeout timeout
+
+            swap = ->
               addedNode.src = origSrc
+
+            addedNode.addEventListener 'error', errorHandler = ->
+              swap()
+              done()
+
+            addedNode.addEventListener 'load', loadHandler = ->
+              loaded = true
+              done()
+
+            timeout = setTimeout ->
+              if not loaded
+                swap()
+                done()
+
+            , TIME_LIMIT
 
           addedNode.src = optimizedSrc
 

@@ -1,5 +1,5 @@
 (function() {
-  var checkNode, guessDimentions, observer, optimizeSrc, selector;
+  var TIME_LIMIT, checkNode, guessDimentions, observer, optimizeSrc, selector;
 
   guessDimentions = function(el) {
     var computed, height, width;
@@ -39,6 +39,8 @@
 
   selector = 'img:not(.no-firesize)';
 
+  TIME_LIMIT = 3000;
+
   checkNode = function(addedNode) {
     var optimizedSrc, origSrc;
     switch (addedNode.nodeType) {
@@ -48,11 +50,30 @@
           origSrc = addedNode.src;
           if (optimizedSrc !== origSrc) {
             (function(origSrc, addedNode) {
-              var handler;
-              return addedNode.addEventListener('error', handler = function() {
-                addedNode.removeEventListener('error', handler);
+              var done, errorHandler, loadHandler, loaded, swap, timeout;
+              loaded = false;
+              done = function() {
+                addedNode.removeEventListener('error', errorHandler);
+                addedNode.removeEventListener('load', loadHandler);
+                return clearTimeout(timeout);
+              };
+              swap = function() {
                 return addedNode.src = origSrc;
+              };
+              addedNode.addEventListener('error', errorHandler = function() {
+                swap();
+                return done();
               });
+              addedNode.addEventListener('load', loadHandler = function() {
+                loaded = true;
+                return done();
+              });
+              return timeout = setTimeout(function() {
+                if (!loaded) {
+                  swap();
+                  return done();
+                }
+              }, TIME_LIMIT);
             })(origSrc, addedNode);
             return addedNode.src = optimizedSrc;
           }
