@@ -3,7 +3,7 @@
     "head": [
       {
         "type": "script",
-        "src": "./optimize.js"
+        "src": "./build/app.js"
       }
     ]
   }
